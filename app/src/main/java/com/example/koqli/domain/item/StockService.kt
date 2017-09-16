@@ -11,9 +11,7 @@ import javax.inject.Inject
  * Created by biwaishi on 2017/09/16.
  */
 
-class StockService{
-    @Inject
-    lateinit var qiitaV2Api: QiitaV2Api
+class StockService(private val qiitaV2Api: QiitaV2Api){
 
     fun isStockingItem(itemId: String): Observable<Unit?> =
             qiitaV2Api.isStockingItem(itemId)

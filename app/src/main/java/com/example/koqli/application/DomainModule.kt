@@ -19,18 +19,12 @@ import javax.inject.Singleton
 class DomainModule{
 
     @Provides
-    fun provideGetItems(qiitaV2Api:QiitaV2Api) = GetItems().apply {
-        this.qiitaV2Api = qiitaV2Api
-    }
+    fun provideGetItems(qiitaV2Api:QiitaV2Api) = GetItems(qiitaV2Api)
 
     @Provides
-    fun provideStockService(qiitaV2Api:QiitaV2Api) = StockService().apply {
-        this.qiitaV2Api = qiitaV2Api
-    }
+    fun provideStockService(qiitaV2Api:QiitaV2Api) = StockService(qiitaV2Api)
 
     @Provides
-    fun provideGetTags(qiitaV2Api:QiitaV2Api) = GetTags().apply {
-        this.qiitaV2Api = qiitaV2Api
-    }
+    fun provideGetTags(qiitaV2Api:QiitaV2Api) = GetTags(qiitaV2Api)
 
 }

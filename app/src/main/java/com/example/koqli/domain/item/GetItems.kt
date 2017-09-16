@@ -11,10 +11,7 @@ import javax.inject.Inject
  * Created by biwaishi on 2017/09/16.
  */
 
-class GetItems{
-
-    @Inject
-    lateinit var qiitaV2Api: QiitaV2Api
+class GetItems(private val qiitaV2Api: QiitaV2Api){
 
     fun getItems(page: Int, perPage: Int): Single<List<Item>> =
             qiitaV2Api.getItems(page, perPage).map{ItemConverter.toDomains(it)}
