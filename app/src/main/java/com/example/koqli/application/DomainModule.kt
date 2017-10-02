@@ -5,6 +5,7 @@ import com.example.koqli.domain.item.GetItems
 import com.example.koqli.domain.item.StockService
 import com.example.koqli.domain.tag.GetTags
 import com.example.koqli.qiita.v2.QiitaV2Api
+import com.example.koqli.usecase.item.GetItemsByKeyword
 import com.securepreferences.SecurePreferences
 import dagger.Module
 import dagger.Provides
@@ -22,9 +23,9 @@ class DomainModule{
     fun provideGetItems(qiitaV2Api:QiitaV2Api) = GetItems(qiitaV2Api)
 
     @Provides
-    fun provideStockService(qiitaV2Api:QiitaV2Api) = StockService(qiitaV2Api)
+    fun provideGetTags(qiitaV2Api:QiitaV2Api) = GetTags(qiitaV2Api)
 
     @Provides
-    fun provideGetTags(qiitaV2Api:QiitaV2Api) = GetTags(qiitaV2Api)
+    fun provideStockService(qiitaV2Api:QiitaV2Api) = StockService(qiitaV2Api)
 
 }
