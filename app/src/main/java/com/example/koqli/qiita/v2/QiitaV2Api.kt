@@ -18,7 +18,7 @@ import retrofit2.http.*
 interface QiitaV2Api{
     companion object {
         fun getQiitaAuthUrl(apiUrl: String, clientId: String, state: String): String{
-            return HttpUrl.parse("$apiUrl/oauth/authorize")?.newBuilder()
+            return HttpUrl.parse("$apiUrl")?.newBuilder()
                     ?.addQueryParameter("scope", "read_qiita write_qiita")
                     ?.addQueryParameter("state", state)
                     ?.addQueryParameter("client_id",clientId)

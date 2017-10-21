@@ -3,7 +3,7 @@ package com.example.koqli.qiita.v2.types
 import javax.annotation.Generated
 import com.google.gson.annotations.SerializedName
 
-@Generated("com.robohorse.robopojogenerator")
+@javax.annotation.Generated("com.robohorse.robopojogenerator")
 data class Token(
 
 	@field:SerializedName("scopes")

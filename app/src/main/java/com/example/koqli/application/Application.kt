@@ -13,7 +13,7 @@ class Application: android.app.Application(){
         fun from(context: Context): Application = context.applicationContext as Application
     }
 
-    val securePreference: KoqliPreferences = KoqliPreferences(this)
+    val securePreference: KoqliPreferences get() = KoqliPreferences.get(this)
 
     val component:  KoqliComponent by lazy{
         DaggerKoqliComponent.builder()
@@ -21,6 +21,8 @@ class Application: android.app.Application(){
                 .dataModule(DataModule(this))
                 .build()
     }
+
+    val usecases: Usecases by lazy {Usecases(this)}
 
     override fun onCreate() {
         super.onCreate()
