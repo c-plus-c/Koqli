@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 interface ViewModel{
     val context:Context
-    val application: Application get() = Application.from(context)
+    val application: Application get() = Application.getApplicationFromContext(context)
     var disposables: CompositeDisposable
 
     fun create(){

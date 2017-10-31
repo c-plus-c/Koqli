@@ -26,6 +26,9 @@ interface KoqliComponent{
     fun inject(getItems: GetItems)
     fun inject(getItemsByKeyword: GetItemsByKeyword)
     fun inject(getItemsByTagId: GetItemsByTagId)
+    fun inject(getAuthenticatedUsersItems: GetAuthenticatedUsersItems)
+    fun inject(getItemsByUserId: GetItemsByUserId)
+    fun inject(getStockedItems: GetStockedItems)
 
     fun inject(getTags: GetTags)
     fun inject(getTagById: GetTagById)

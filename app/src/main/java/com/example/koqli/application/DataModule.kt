@@ -1,7 +1,5 @@
 package com.example.koqli.application
 
-import android.content.Context
-import com.example.koqli.BuildConfig
 import com.example.koqli.Settings
 import com.example.koqli.qiita.v2.QiitaV2Api
 import com.google.gson.Gson
@@ -13,7 +11,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import javax.inject.Singleton
 
 /**
  * Created by biwaishi on 2017/09/11.

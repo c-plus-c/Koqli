@@ -10,7 +10,7 @@ import com.example.koqli.application.preference.KoqliPreferences
 class Application: android.app.Application(){
     companion object {
 
-        fun from(context: Context): Application = context.applicationContext as Application
+        fun getApplicationFromContext(context: Context): Application = context.applicationContext as Application
     }
 
     val securePreference: KoqliPreferences get() = KoqliPreferences.get(this)

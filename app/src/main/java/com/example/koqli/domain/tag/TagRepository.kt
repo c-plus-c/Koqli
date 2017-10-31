@@ -8,7 +8,7 @@ import javax.inject.Inject
  * Created by biwaishi on 2017/09/16.
  */
 
-class GetTags(private val qiitaV2Api: QiitaV2Api){
+class TagRepository(private val qiitaV2Api: QiitaV2Api){
 
     fun getTags(page: Int, perPage: Int): Single<List<Tag>> =
             qiitaV2Api.getTags(page, perPage).map { TagConverter.toDomains(it) }

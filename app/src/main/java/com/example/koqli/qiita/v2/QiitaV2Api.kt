@@ -45,6 +45,15 @@ interface QiitaV2Api{
     @GET("tags/{tag_id}/items")
     fun getItemsByTagId(@Path("tag_id") tagId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
 
+    @GET("users/{user_id}/stocks")
+    fun getStockedItems(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+
+    @GET("users/authenticated_user/items")
+    fun getAuthenticatedUsersItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+
+    @GET("users/{user_id}/items")
+    fun getItemsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+
     @GET("tags")
     fun getTags(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
 

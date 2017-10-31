@@ -12,7 +12,7 @@ import com.example.koqli.usecase.tag.GetTagsByUserId
  */
 
 class Usecases(val context: Context){
-    private val application: Application get() = Application.from(context)
+    private val application: Application get() = Application.getApplicationFromContext(context)
     private val component: KoqliComponent get() = application.component
 
     fun getAuthorizeAccount(code: String) = AuthorizeAccount(code).apply { component.inject(this) }
@@ -22,6 +22,12 @@ class Usecases(val context: Context){
     fun getItemsByKeyword(query: String, page: Int, perPage: Int) = GetItemsByKeyword(query, page, perPage).apply{component.inject(this)}
 
     fun getItemsByTagId(tagId: String, page: Int, perPage: Int) = GetItemsByTagId(tagId, page, perPage).apply{component.inject(this)}
+
+    fun getAuthenticatedUsersItems(page: Int, perPage: Int) = GetAuthenticatedUsersItems(page, perPage).apply { component.inject(this) }
+
+    fun getItemsByUserId(userId: String, page: Int, perPage: Int) = GetItemsByUserId(userId, page, perPage).apply { component.inject(this) }
+
+    fun getStockedItems(userId: String, page: Int, perPage: Int) = GetStockedItems(userId, page, perPage).apply { component.inject(this) }
 
     fun getTags(page: Int, perPage: Int) = GetTags(page, perPage).apply{component.inject(this)}
 

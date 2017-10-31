@@ -1,7 +1,7 @@
 package com.example.koqli.usecase.item
 
-import com.example.koqli.domain.item.GetItems
 import com.example.koqli.domain.item.Item
+import com.example.koqli.domain.item.ItemRepository
 import com.example.koqli.usecase.BaseRxUseCase
 import io.reactivex.Single
 import javax.inject.Inject
@@ -13,11 +13,11 @@ import javax.inject.Inject
 class GetItemsByTagId(private val tagId: String, private val page: Int, private val perPage: Int) : BaseRxUseCase<MutableList<Item>>(){
 
     @Inject
-    lateinit var getItems:GetItems;
+    lateinit var itemRepository: ItemRepository;
 
     override fun source(): Single<MutableList<Item>> =
             Single.create {
-                getItems.getItemsByTagId(tagId, page, perPage)
+                itemRepository.getItemsByTagId(tagId, page, perPage)
             }
 
 }

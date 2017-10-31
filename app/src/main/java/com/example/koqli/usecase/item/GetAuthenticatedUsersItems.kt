@@ -7,16 +7,16 @@ import io.reactivex.Single
 import javax.inject.Inject
 
 /**
- * Created by biwaishi on 2017/10/02.
+ * Created by biwaishi on 2017/10/31.
  */
-
-class GetItemsByKeyword (private val query: String, private val page: Int, private val perPage: Int): BaseRxUseCase<MutableList<Item>>(){
+class GetAuthenticatedUsersItems(private val page: Int, private val perPage: Int) : BaseRxUseCase<MutableList<Item>>(){
 
     @Inject
     lateinit var itemRepository: ItemRepository;
 
     override fun source(): Single<MutableList<Item>> =
             Single.create {
-                itemRepository.getItemsByKeyword(query, page, perPage)
+                itemRepository.getAuthenticatedUsersItems(page, perPage)
             }
+
 }
