@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var application: Application
 
-    lateinit var loginActivityViewModel: LoginActivityViewModel
+    private lateinit var loginActivityViewModel: LoginActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
