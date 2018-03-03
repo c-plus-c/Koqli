@@ -37,28 +37,28 @@ interface QiitaV2Api{
     fun getAuthenticatedUser(): Single<User>
 
     @GET("items")
-    fun getItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("items")
-    fun getItemsByKeyword(@Query("query") query: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getItemsByKeyword(@Query("query") query: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("tags/{tag_id}/items")
-    fun getItemsByTagId(@Path("tag_id") tagId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getItemsByTagId(@Path("tag_id") tagId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("users/{user_id}/stocks")
-    fun getStockedItems(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getStockedItems(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("users/authenticated_user/items")
-    fun getAuthenticatedUsersItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getAuthenticatedUsersItems(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("users/{user_id}/items")
-    fun getItemsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Item>>
+    fun getItemsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Item>>
 
     @GET("tags")
-    fun getTags(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
+    fun getTags(@Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Tag>>
 
     @GET("users/{user_id}/following_tags")
-    fun getTagsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<MutableList<Tag>>
+    fun getTagsByUserId(@Path("user_id") userId: String, @Query("page") page: Int, @Query("per_page") perPage: Int): Single<List<Tag>>
 
     @GET("tags/{tag_id}")
     fun getTagById(@Path("tag_id") tagId: String): Single<Tag>

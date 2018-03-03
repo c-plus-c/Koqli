@@ -12,13 +12,13 @@ class ItemListPagerAdapter(fragmentManager: FragmentManager): FragmentPagerAdapt
     override fun getItem(position: Int): Fragment? {
         when{
             position == 0 -> {
-                return ItemListFragment.newInstance(android.R.color.holo_blue_bright)
+                return ItemListFragment.newInstance(ItemListFragment.DataListType.FEED)
             }
             position == 1 -> {
-                return ItemListFragment.newInstance(android.R.color.holo_green_light)
+                return ItemListFragment.newInstance(ItemListFragment.DataListType.FEED)
             }
             position == 2 -> {
-                return ItemListFragment.newInstance(android.R.color.holo_red_dark)
+                return ItemListFragment.newInstance(ItemListFragment.DataListType.FEED)
             }
         }
         return null

@@ -1,5 +1,7 @@
 package com.example.koqli.ui.login
 
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.support.v7.app.AppCompatActivity
@@ -24,8 +26,6 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.activity_login)
-
 
         if(Application.getApplicationFromContext(this)?.securePreference?.hasToken()){
             val nextIntent = Intent(this, MainScreenActivity::class.java)
@@ -33,25 +33,23 @@ class LoginActivity : AppCompatActivity() {
         }
         else if(intent != null && intent?.data != null) {
             val authCode = QiitaV2Api.extractAuthCode(intent?.data.toString())
-            loginActivityViewModel = LoginActivityViewModel(baseContext, authCode)
+            loginActivityViewModel = ViewModelProviders.of(this).get(LoginActivityViewModel::class.java)
+
             loginActivityViewModel.isLoginSuccess
-                    .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
-                    .subscribe {
+                    .observe(this, Observer{
                         Toast.makeText(baseContext, "ログインに成功しました", Toast.LENGTH_SHORT).show()
                         val nextIntent = Intent(this, MainScreenActivity::class.java)
                         startActivity (nextIntent)
-            }.apply {
-                loginActivityViewModel.disposables.add(this)
-            }
-            loginActivityViewModel.error
-                    .autoDisposeWith(AndroidLifecycleScopeProvider.from(this))
-                    .subscribe {
-                it -> Toast.makeText(baseContext, "失敗だよバーカ！", Toast.LENGTH_SHORT).show()
-            }.apply {
-                loginActivityViewModel.disposables.add(this)
-            }
+            })
 
-            loginActivityViewModel.login()
+            loginActivityViewModel.error
+                    .observe(this, Observer{
+                it -> Toast.makeText(baseContext, "失敗だよバーカ！", Toast.LENGTH_SHORT).show()
+            })
+
+            authCode?.let {
+                loginActivityViewModel.login(Application.getApplicationFromContext(applicationContext).usecases, authCode)
+            }
         } else {
             val tabsIntent: CustomTabsIntent = CustomTabsIntent.Builder().build()
             tabsIntent.launchUrl(this, Uri.parse(QiitaV2Api.getQiitaAuthUrl("https://qiita.com/api/v2/oauth/authorize", Settings.clientId,"")))

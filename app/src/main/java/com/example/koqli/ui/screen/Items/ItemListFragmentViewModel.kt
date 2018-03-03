@@ -1,40 +1,42 @@
 package com.example.koqli.ui.screen.Items
 
-import android.content.Context
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.ViewModel
+import android.util.Log
+import com.example.koqli.application.Application
+import com.example.koqli.application.Usecases
 import com.example.koqli.domain.item.Item
-import com.example.koqli.ui.ViewModel
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
-import jp.keita.kagurazaka.rxproperty.RxProperty
 
 /**
  * Created by biwaishi on 2017/10/22.
  */
-class ItemListFragmentViewModel(override val context: Context, val code: String?): ViewModel {
+class ItemListFragmentViewModel : ViewModel() {
 
     companion object {
         val PerPage: Int = 10
     }
 
-    val isLoading :RxProperty<Boolean> = RxProperty()
-    val resultList : RxProperty<MutableList<Item>> = RxProperty()
-    val error: RxProperty<Throwable> = RxProperty()
-    override var disposables: CompositeDisposable = CompositeDisposable()
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
+    val resultList: MutableLiveData<List<Item>> = MutableLiveData()
+    val error: MutableLiveData<Throwable> = MutableLiveData()
 
-    fun getItemsAll(page: Int) {
-        isLoading.set(true);
-        application.usecases.getItems(page, PerPage)
-                .compose {
-                    it.subscribeOn(Schedulers.computation()).observeOn(AndroidSchedulers.mainThread()).doFinally{
-                        isLoading.set(false)
-                    }
-                }
-                .apply { disposables.add(this) }
+    var currentPage = 1
+
+    fun getItemsAll(usecases: Usecases) {
+
+        if(isLoading.value == true){
+            return
+        }
+
+        isLoading.value = true
+
+        usecases.getItems(currentPage++, PerPage)
                 .exec({
-                    resultList.set(it)
+                    resultList.postValue(it)
                 }, {
-                    error.set(it)
+                    error.postValue(it)
+                }, {
+                    isLoading.value = false
                 })
     }
 }

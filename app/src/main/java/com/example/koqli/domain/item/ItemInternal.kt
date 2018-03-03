@@ -2,7 +2,6 @@ package com.example.koqli.domain.item
 
 import com.example.koqli.domain.tagging.Tagging
 import com.example.koqli.domain.user.User
-import com.google.gson.annotations.SerializedName
 import java.util.*
 
 /**

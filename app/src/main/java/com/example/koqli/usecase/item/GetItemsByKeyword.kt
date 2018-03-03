@@ -10,13 +10,11 @@ import javax.inject.Inject
  * Created by biwaishi on 2017/10/02.
  */
 
-class GetItemsByKeyword (private val query: String, private val page: Int, private val perPage: Int): BaseRxUseCase<MutableList<Item>>(){
+class GetItemsByKeyword (private val query: String, private val page: Int, private val perPage: Int): BaseRxUseCase<List<Item>>(){
 
     @Inject
     lateinit var itemRepository: ItemRepository;
 
-    override fun source(): Single<MutableList<Item>> =
-            Single.create {
-                itemRepository.getItemsByKeyword(query, page, perPage)
-            }
+    override fun source(): Single<List<Item>> =
+            itemRepository.getItemsByKeyword(query, page, perPage)
 }

@@ -2,20 +2,19 @@ package com.example.koqli.domain.item
 
 import com.example.koqli.domain.AbstractEntity
 import com.example.koqli.domain.tagging.Tagging
-import com.example.koqli.domain.tagging.TaggingConverter
 import com.example.koqli.domain.user.User
-import com.example.koqli.domain.user.UserConverter
 import java.util.*
 
 /**
  * Created by biwaishi on 2017/09/16.
  */
-class Item(itemIdentity: ItemIdentity): AbstractEntity<ItemIdentity, Item>(itemIdentity){
+class Item(private val itemIdentity: ItemIdentity) : AbstractEntity<ItemIdentity, Item>(itemIdentity) {
     companion object {
         val empty = Item(ItemIdentity("")).apply {
             itemInternal = ItemInternal(null,null,null,null,null,null,null,null,null,null,null,null,null,null)
         }
     }
+
     val renderedBody: String? get() = itemInternal?.renderedBody
     val jsonMemberPrivate: Boolean? get() = itemInternal?.jsonMemberPrivate
     val createdAt: Date? get() = itemInternal?.createdAt

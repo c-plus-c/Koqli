@@ -9,14 +9,12 @@ import javax.inject.Inject
 /**
  * Created by biwaishi on 2017/10/31.
  */
-class GetStockedItems(private val userId: String, private val page: Int, private val perPage: Int) : BaseRxUseCase<MutableList<Item>>() {
+class GetStockedItems(private val userId: String, private val page: Int, private val perPage: Int) : BaseRxUseCase<List<Item>>() {
 
     @Inject
     lateinit var itemRepository: ItemRepository;
 
-    override fun source(): Single<MutableList<Item>> =
-            Single.create {
-                itemRepository.getStockedItems(userId, page, perPage)
-            }
+    override fun source(): Single<List<Item>> =
+            itemRepository.getStockedItems(userId, page, perPage)
 
 }

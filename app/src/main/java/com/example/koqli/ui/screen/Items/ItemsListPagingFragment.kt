@@ -16,17 +16,17 @@ class ItemsListPagingFragment : Fragment() {
         super.onCreate(savedInstanceState)
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentItemsListPagingBinding>(inflater, R.layout.fragment_items_list_paging, container, false)
 
-        binding.itemListPager.adapter = ItemListPagerAdapter(fragmentManager)
-        binding.tablayout.setupWithViewPager(binding.itemListPager)
+        binding.coordinatorTabLayout.setupWithViewPager(binding.viewPager)
+        binding.viewPager.adapter = ItemListPagerAdapter(fragmentManager!!)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
 

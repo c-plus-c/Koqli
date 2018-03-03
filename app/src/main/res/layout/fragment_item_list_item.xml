@@ -1,7 +1,14 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="item"
+            type="com.example.koqli.domain.item.Item" />
+    </data>
 <android.support.constraint.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_item_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -20,7 +27,7 @@
 
             <ImageView
                 android:id="@+id/fragment_item_list_item_icon"
-                android:layout_width="wrap_content"
+                android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="8dp"
                 android:layout_marginBottom="8dp"
@@ -35,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_marginTop="4dp"
-                android:text="TextView"
+                android:text="@{item.updatedAt.toString()}"
                 android:textSize="12sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,9 +53,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="4dp"
-                android:text="TextView"
+                android:layout_marginTop="8dp"
+                android:text="@{item.user.id}"
                 android:textSize="12sp"
+                tools:text="ｆだｓふぁｓｄふぁｓｄふぁ"
                 app:layout_constraintBottom_toTopOf="@+id/fragment_item_list_item_title"
                 app:layout_constraintStart_toEndOf="@+id/fragment_item_list_item_icon"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -57,23 +65,28 @@
                 android:id="@+id/fragment_item_list_item_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
+                android:text="@{item.title}"
                 app:layout_constraintBottom_toTopOf="@+id/fragment_item_list_item_tags_layout"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/fragment_item_list_item_icon"
-                tools:text="はげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげはげ" />
+                tools:text="gfsdgfsdgfsgfsdgfsdgfsdgfsdgfsdgfsddgfsdgfsdgfsd" />
 
 
             <com.google.android.flexbox.FlexboxLayout
                 android:id="@+id/fragment_item_list_item_tags_layout"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                app:alignContent="flex_start"
+                app:flexWrap="wrap"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
-
             </com.google.android.flexbox.FlexboxLayout>
         </android.support.constraint.ConstraintLayout>
 

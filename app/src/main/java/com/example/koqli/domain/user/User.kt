@@ -13,6 +13,7 @@ class User(val userIdentity: UserIdentity){
         }
     }
 
+    val id: String? get() = userIdentity.value
     val description: String? get() = userInternal?.description
     val linkedinId: String? get() = userInternal?.linkedinId
     val profileImageUrl: String? get() = userInternal?.profileImageUrl

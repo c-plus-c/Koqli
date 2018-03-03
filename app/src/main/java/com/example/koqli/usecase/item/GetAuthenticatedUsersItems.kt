@@ -9,12 +9,12 @@ import javax.inject.Inject
 /**
  * Created by biwaishi on 2017/10/31.
  */
-class GetAuthenticatedUsersItems(private val page: Int, private val perPage: Int) : BaseRxUseCase<MutableList<Item>>(){
+class GetAuthenticatedUsersItems(private val page: Int, private val perPage: Int) : BaseRxUseCase<List<Item>>(){
 
     @Inject
     lateinit var itemRepository: ItemRepository;
 
-    override fun source(): Single<MutableList<Item>> =
+    override fun source(): Single<List<Item>> =
             Single.create {
                 itemRepository.getAuthenticatedUsersItems(page, perPage)
             }

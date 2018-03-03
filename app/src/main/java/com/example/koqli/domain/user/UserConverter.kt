@@ -1,13 +1,13 @@
 package com.example.koqli.domain.user
 
-import com.example.koqli.qiita.v2.types.User as DataUser
+import com.example.koqli.qiita.v2.types.User as InfraUser
 
 /**
  * Created by biwaishi on 2017/09/16.
  */
 
 object UserConverter {
-    fun toDomain(dataUser: DataUser): User = User(UserIdentity(dataUser.id!!)).apply {
+    fun toDomain(dataUser: InfraUser): User = User(UserIdentity(dataUser.id!!)).apply {
         userInternal = UserInternal(
                 description = dataUser.description,
                 linkedinId = dataUser.linkedinId,
@@ -26,8 +26,8 @@ object UserConverter {
         )
     }
 
-    fun toData(user: User): DataUser =
-            DataUser(
+    fun toData(user: User): InfraUser =
+            InfraUser(
                     description = user.description,
                     linkedinId = user.linkedinId,
                     profileImageUrl = user.profileImageUrl,

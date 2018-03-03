@@ -6,40 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <android.support.design.widget.CoordinatorLayout
-            android:id="@+id/coordinate_layout"
+        <fragment
+            android:id="@+id/fragment"
+            android:name="com.example.koqli.ui.screen.Items.ItemsListPagingFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true">
+            android:layout_height="wrap_content" />
 
-            <android.support.design.widget.AppBarLayout
-                android:id="@+id/app_bar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fitsSystemWindows="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?android:attr/actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            </android.support.design.widget.AppBarLayout>
-
-            <fragment
-                android:id="@+id/fragment"
-                android:name="com.example.koqli.ui.screen.Items.ItemsListPagingFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-        </android.support.design.widget.CoordinatorLayout>
-
-        <FrameLayout
-            android:id="@+id/content_frame"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
         <!-- The navigation drawer -->
         <ListView
             android:id="@+id/left_drawer"
