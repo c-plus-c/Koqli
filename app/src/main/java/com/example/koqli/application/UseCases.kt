@@ -41,4 +41,6 @@ class Usecases(val context: Context){
 
     fun unstockItem(itemId: String) = UnstockItem(itemId).apply{component.inject(this)}
 
+    fun getTagFeedItems(page: Int, perPage: Int) = GetTagFeedItems(page, perPage).apply{component.inject(this)}
+
 }

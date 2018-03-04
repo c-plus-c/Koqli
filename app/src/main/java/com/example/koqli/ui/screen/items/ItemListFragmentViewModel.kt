@@ -1,19 +1,19 @@
-package com.example.koqli.ui.screen.Items
+package com.example.koqli.ui.screen.items
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
-import android.util.Log
 import com.example.koqli.application.Application
 import com.example.koqli.application.Usecases
 import com.example.koqli.domain.item.Item
+import com.example.koqli.usecase.BaseRxUseCase
 
 /**
  * Created by biwaishi on 2017/10/22.
  */
-class ItemListFragmentViewModel : ViewModel() {
+abstract class ItemListFragmentViewModel : ViewModel() {
 
     companion object {
-        val PerPage: Int = 10
+        val PER_PAGE: Int = 10
     }
 
     val isLoading: MutableLiveData<Boolean> = MutableLiveData()
@@ -22,7 +22,7 @@ class ItemListFragmentViewModel : ViewModel() {
 
     var currentPage = 1
 
-    fun getItemsAll(usecases: Usecases) {
+    fun getItemsAll(application: Application) {
 
         if(isLoading.value == true){
             return
@@ -30,7 +30,7 @@ class ItemListFragmentViewModel : ViewModel() {
 
         isLoading.value = true
 
-        usecases.getItems(currentPage++, PerPage)
+        getItems(application, currentPage++)
                 .exec({
                     resultList.postValue(it)
                 }, {
@@ -39,4 +39,6 @@ class ItemListFragmentViewModel : ViewModel() {
                     isLoading.value = false
                 })
     }
+
+    protected abstract fun getItems(application: Application, currentPage: Int): BaseRxUseCase<List<Item>>
 }

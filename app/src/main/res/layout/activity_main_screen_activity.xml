@@ -8,21 +8,17 @@
 
         <fragment
             android:id="@+id/fragment"
-            android:name="com.example.koqli.ui.screen.Items.ItemsListPagingFragment"
+            android:name="com.example.koqli.ui.screen.items.ItemsListPagingFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <!-- The navigation drawer -->
-        <ListView
+        <android.support.design.widget.NavigationView
             android:id="@+id/left_drawer"
-            android:layout_width="240dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            android:background="#111"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="0dp">
-
-        </ListView>
+            android:fitsSystemWindows="true"
+            app:menu="@menu/nav_drawer_menu"/>
 </android.support.v4.widget.DrawerLayout>
 </layout>

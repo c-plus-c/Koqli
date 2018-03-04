@@ -1,5 +1,6 @@
 package com.example.koqli.domain.item
 
+import com.example.koqli.domain.tag.TagIdentity
 import com.example.koqli.qiita.v2.QiitaV2Api
 import io.reactivex.Single
 import retrofit2.http.GET
@@ -30,4 +31,7 @@ class ItemRepository(private val qiitaV2Api: QiitaV2Api){
 
     fun getItemsByUserId(userId: String, page: Int, perPage: Int): Single<List<Item>> =
             qiitaV2Api.getItemsByUserId(userId, page, perPage).map { ItemConverter.toDomains(it) }
+
+    fun getTagFeedItems(tagIdentities: List<TagIdentity>, page: Int, perPage: Int): Single<List<Item>> =
+            qiitaV2Api.getItemsByKeyword(tagIdentities.joinToString(separator = " OR ", transform = {"tag:${it.value}"}), page, perPage).map { ItemConverter.toDomains(it) }
 }

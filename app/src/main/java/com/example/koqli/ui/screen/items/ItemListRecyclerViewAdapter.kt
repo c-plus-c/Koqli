@@ -1,8 +1,7 @@
-package com.example.koqli.ui.screen.Items
+package com.example.koqli.ui.screen.items
 
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -17,7 +16,6 @@ import com.example.koqli.databinding.ItemTagBinding
 import com.example.koqli.domain.item.Item
 import com.example.koqli.domain.tagging.Tagging
 import com.example.koqli.domain.user.User
-import java.util.logging.Logger
 
 /**
  * Created by biwaishi on 2017/12/28.

@@ -1,4 +1,4 @@
-package com.example.koqli.ui.screen.Items
+package com.example.koqli.ui.screen.items
 
 import android.content.Context
 import android.databinding.DataBindingUtil
