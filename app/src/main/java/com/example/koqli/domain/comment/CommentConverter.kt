@@ -18,4 +18,6 @@ object CommentConverter{
                 id = dataComment.id,
                 body = dataComment.body)
     }
+
+    fun toDomains(dataComment: Collection<DataComment>): List<Comment> = dataComment.map { toDomain(it) }
 }

@@ -2,6 +2,7 @@ package com.example.koqli.application
 
 import android.content.Context
 import com.example.koqli.usecase.AuthorizeAccount
+import com.example.koqli.usecase.comment.GetCommentsByItemId
 import com.example.koqli.usecase.item.*
 import com.example.koqli.usecase.tag.GetTagById
 import com.example.koqli.usecase.tag.GetTags
@@ -18,6 +19,8 @@ class Usecases(val context: Context){
     fun getAuthorizeAccount(code: String) = AuthorizeAccount(code).apply { component.inject(this) }
 
     fun getItems(page: Int, perPage: Int) = GetItems(page, perPage).apply { component.inject(this) }
+
+    fun getItem(itemId: String) = GetItem(itemId).apply { component.inject(this) }
 
     fun getItemsByKeyword(query: String, page: Int, perPage: Int) = GetItemsByKeyword(query, page, perPage).apply{component.inject(this)}
 
@@ -42,5 +45,7 @@ class Usecases(val context: Context){
     fun unstockItem(itemId: String) = UnstockItem(itemId).apply{component.inject(this)}
 
     fun getTagFeedItems(page: Int, perPage: Int) = GetTagFeedItems(page, perPage).apply{component.inject(this)}
+
+    fun getCommentsByItemId(itemId: String) = GetCommentsByItemId(itemId).apply{component.inject(this)}
 
 }

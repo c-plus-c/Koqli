@@ -1,5 +1,6 @@
 package com.example.koqli.application
 
+import com.example.koqli.domain.comment.CommentRepository
 import com.example.koqli.domain.item.ItemRepository
 import com.example.koqli.domain.item.StockService
 import com.example.koqli.domain.tag.TagRepository
@@ -19,6 +20,9 @@ class DomainModule{
 
     @Provides
     fun provideTagRepository(qiitaV2Api: QiitaV2Api) = TagRepository(qiitaV2Api)
+
+    @Provides
+    fun provideCommentRepository(qiitaV2Api: QiitaV2Api) = CommentRepository(qiitaV2Api)
 
     @Provides
     fun provideStockService(qiitaV2Api:QiitaV2Api) = StockService(qiitaV2Api)

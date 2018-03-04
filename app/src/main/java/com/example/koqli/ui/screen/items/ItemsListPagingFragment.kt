@@ -12,10 +12,6 @@ import com.example.koqli.databinding.FragmentItemsListPagingBinding
 
 class ItemsListPagingFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = DataBindingUtil.inflate<FragmentItemsListPagingBinding>(inflater, R.layout.fragment_items_list_paging, container, false)

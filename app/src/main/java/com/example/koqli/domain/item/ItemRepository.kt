@@ -3,16 +3,15 @@ package com.example.koqli.domain.item
 import com.example.koqli.domain.tag.TagIdentity
 import com.example.koqli.qiita.v2.QiitaV2Api
 import io.reactivex.Single
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
-import javax.inject.Inject
 
 /**
  * Created by biwaishi on 2017/09/16.
  */
 
 class ItemRepository(private val qiitaV2Api: QiitaV2Api){
+
+    fun getItem(itemId: String): Single<Item> =
+            qiitaV2Api.getItem(itemId).map { ItemConverter.toDomain(it) }
 
     fun getItems(page: Int, perPage: Int): Single<List<Item>> =
             qiitaV2Api.getItems(page, perPage).map{ItemConverter.toDomains(it)}

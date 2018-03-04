@@ -2,6 +2,7 @@ package com.example.koqli.application
 
 import com.example.koqli.domain.item.StockService
 import com.example.koqli.usecase.AuthorizeAccount
+import com.example.koqli.usecase.comment.GetCommentsByItemId
 import com.example.koqli.usecase.item.*
 import com.example.koqli.usecase.tag.GetTagById
 import com.example.koqli.usecase.tag.GetTags
@@ -24,6 +25,7 @@ interface KoqliComponent{
     fun inject(stockService: StockService)
 
     fun inject(getItems: GetItems)
+    fun inject(getItem: GetItem)
     fun inject(getItemsByKeyword: GetItemsByKeyword)
     fun inject(getItemsByTagId: GetItemsByTagId)
     fun inject(getAuthenticatedUsersItems: GetAuthenticatedUsersItems)
@@ -38,4 +40,6 @@ interface KoqliComponent{
     fun inject(isStockingItem: IsStockingItem)
     fun inject(stockItem: StockItem)
     fun inject(unstockItem: UnstockItem)
+
+    fun inject(getCommentsByItemId: GetCommentsByItemId)
 }

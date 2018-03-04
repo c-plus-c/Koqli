@@ -8,12 +8,12 @@ import javax.inject.Inject
 /**
  * Created by biwaishi on 2017/10/02.
  */
-class UnstockItem(private val itemId: String): BaseRxUseCase<Unit?>(){
+class UnstockItem(private val itemId: String) : BaseRxUseCase<Boolean>() {
 
     @Inject
     lateinit var stockService: StockService;
 
-    override fun source(): Single<Unit?> =
+    override fun source(): Single<Boolean> =
             Single.create {
                 stockService.unstockItem(itemId)
             }

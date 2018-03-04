@@ -2,10 +2,7 @@ package com.example.koqli.qiita.v2
 
 import android.net.Uri
 import com.example.koqli.qiita.v2.queries.LoginParameter
-import com.example.koqli.qiita.v2.types.Item
-import com.example.koqli.qiita.v2.types.Tag
-import com.example.koqli.qiita.v2.types.Token
-import com.example.koqli.qiita.v2.types.User
+import com.example.koqli.qiita.v2.types.*
 import io.reactivex.Observable
 import io.reactivex.Single
 import okhttp3.HttpUrl
@@ -71,4 +68,10 @@ interface QiitaV2Api{
 
     @DELETE("items/{item_id}/stock")
     fun unstockItem(@Path("item_id") itemId: String): Observable<Unit?>
+
+    @GET("items/{item_id}")
+    fun getItem(@Path("item_id") itemId: String): Single<Item>
+
+    @GET("items/{item_id}/comments")
+    fun getCommentsByItemId(@Path("item_id") itemId: String): Single<List<Comment>>
 }
