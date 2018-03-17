@@ -1,7 +1,6 @@
 package com.example.koqli.ui.screen.items
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -14,18 +13,20 @@ import com.example.koqli.R
 import com.example.koqli.application.Application
 import com.example.koqli.databinding.FragmentItemListBinding
 import com.jakewharton.rxbinding2.support.v7.widget.scrollEvents
-import io.reactivex.disposables.Disposable
+import com.michaelflisar.rxbus2.RxBus
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.rxkotlin.addTo
 
 
 /**
  * Created by biwaishi on 2017/10/22.
  */
 
-abstract class ItemListFragment<VM: ItemListFragmentViewModel>: Fragment(){
+abstract class ItemListFragment<VM : ItemListFragmentViewModel> : Fragment() {
 
     private lateinit var viewModel: VM
 
-    private lateinit var disposable: Disposable
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -33,22 +34,22 @@ abstract class ItemListFragment<VM: ItemListFragmentViewModel>: Fragment(){
 
         val layoutManager = LinearLayoutManager(context)
         binding.itemList.layoutManager = layoutManager
-        val itemListRecyclerViewAdapter = ItemListRecyclerViewAdapter({
-
-        },{
-
-        },{
-
+        val itemListRecyclerViewAdapter = ItemListRecyclerViewAdapter({ item ->
+            RxBus.get().withKey("open_item_detail").send(item)
+        }, {
+            //TODO
+        }, {
+            //TODO
         })
 
 
         binding.itemList.adapter = itemListRecyclerViewAdapter
 
         viewModel = createViewModel()
-        viewModel.resultList.observe(this, Observer{
+        viewModel.resultList.observe(this, Observer {
             it?.let { itemList ->
                 activity?.let { fragmentActivity ->
-                    fragmentActivity.runOnUiThread{
+                    fragmentActivity.runOnUiThread {
                         itemListRecyclerViewAdapter.addItems(itemList.toMutableList())
                     }
                 }
@@ -58,7 +59,7 @@ abstract class ItemListFragment<VM: ItemListFragmentViewModel>: Fragment(){
         viewModel.isLoading.observe(this, Observer {
             it?.let {
                 itemListRecyclerViewAdapter.isLoading = it
-                if(!it) {
+                if (!it) {
                     binding.itemList.stopScroll()
                 }
             }
@@ -69,27 +70,27 @@ abstract class ItemListFragment<VM: ItemListFragmentViewModel>: Fragment(){
             Toast.makeText(context, "データの取得に失敗しました", Toast.LENGTH_LONG).show()
         })
 
-        disposable = binding.itemList.scrollEvents()
-                .filter{itemListRecyclerViewAdapter.itemCount - 1 <= layoutManager.findLastVisibleItemPosition()}
+        binding.itemList.scrollEvents()
+                .filter { itemListRecyclerViewAdapter.itemCount - 1 <= layoutManager.findLastVisibleItemPosition() }
                 .take(1)
                 .repeat()
                 .subscribe({
                     viewModel.getItemsAll(Application.getApplicationFromContext(context!!))
                 })
+                .addTo(compositeDisposable)
         return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        context?.let{
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        context?.let {
             viewModel.getItemsAll(Application.getApplicationFromContext(it))
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        disposable.dispose()
+        compositeDisposable.dispose()
     }
 
     abstract fun createViewModel(): VM

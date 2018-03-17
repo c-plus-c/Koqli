@@ -14,8 +14,6 @@ class UnstockItem(private val itemId: String) : BaseRxUseCase<Boolean>() {
     lateinit var stockService: StockService;
 
     override fun source(): Single<Boolean> =
-            Single.create {
-                stockService.unstockItem(itemId)
-            }
+            stockService.unstockItem(itemId)
 
 }

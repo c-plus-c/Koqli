@@ -2,11 +2,13 @@ package com.example.koqli.domain.item
 
 import com.example.koqli.domain.tagging.Tagging
 import com.example.koqli.domain.user.User
+import java.io.Serializable
 import java.util.*
 
 /**
  * Created by biwaishi on 2017/09/16.
  */
+
 data class ItemInternal(
         val renderedBody: String? = null,
         val jsonMemberPrivate: Boolean? = null,
@@ -22,4 +24,4 @@ data class ItemInternal(
         val id: String? = null,
         val coediting: Boolean? = null,
         val user: User? = null
-)
+) : Serializable

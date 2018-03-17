@@ -19,7 +19,6 @@ class ArticleFragmentViewModel : ViewModel() {
     val errors: MutableLiveData<Throwable> = MutableLiveData()
 
     fun loadContent(application: Application, itemId: String) {
-
         if (isCommentsLoading.value == true) {
             return
         }
@@ -61,13 +60,18 @@ class ArticleFragmentViewModel : ViewModel() {
                 }, {
                     errors.postValue(it)
                 }, {
-                    isStocking.postValue(false)
+                    isStockUpdating.postValue(false)
                 })
     }
 
     fun toggleStock(application: Application, itemId: String) {
+
+        if (isStockUpdating.value == true) {
+            return
+        }
+
         isStockUpdating.postValue(true)
-        if (isStocking.value ?: false) {
+        if (isStocking.value == true) {
             application.usecases.unstockItem(itemId).exec({
                 isStocking.postValue(false)
             }, {

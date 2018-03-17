@@ -10,13 +10,12 @@ import javax.inject.Inject
  * Created by biwaishi on 2018/03/04.
  */
 
-class GetCommentsByItemId(private val itemId: String): BaseRxUseCase<List<Comment>>(){
+class GetCommentsByItemId(private val itemId: String) : BaseRxUseCase<List<Comment>>() {
 
     @Inject
     lateinit var commentRepository: CommentRepository
 
-    override fun source(): Single<List<Comment>> = Single.create{
+    override fun source(): Single<List<Comment>> =
             commentRepository.getCommentsByItemId(itemId)
-    }
 
 }

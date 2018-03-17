@@ -27,10 +27,10 @@ class ItemListRecyclerViewAdapter(private val onTappedItem: ((Item) -> Unit)?,
 
     val itemList: MutableList<Item> = mutableListOf()
     var isLoading = false
-    set(value) {
-        field = value
-        notifyDataSetChanged()
-    }
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
@@ -64,10 +64,11 @@ class ItemListRecyclerViewAdapter(private val onTappedItem: ((Item) -> Unit)?,
 
             holder.binding.fragmentItemListItemTagsLayout.removeAllViews()
             item.tags?.forEach { tagging ->
-                val layoutInflater = LayoutInflater.from(holder.binding.root.context)
+                val context = holder.binding.root.context
+                val layoutInflater = LayoutInflater.from(context)
                 val tagLayout = DataBindingUtil.inflate<ItemTagBinding>(layoutInflater, R.layout.item_tag, null, false)
                 val marginLayoutParams = ViewGroup.MarginLayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-                marginLayoutParams.rightMargin = 20
+                marginLayoutParams.rightMargin = context.getResources().getDimensionPixelSize(R.dimen.between_detail_tag_and_tag)
                 tagLayout.root.layoutParams = marginLayoutParams
                 tagLayout.itemTagName.text = tagging!!.name
 
@@ -102,22 +103,22 @@ class ItemListRecyclerViewAdapter(private val onTappedItem: ((Item) -> Unit)?,
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
-        when(viewType){
-            ItemType.ITEM.value -> {
-                val binding = DataBindingUtil.inflate<FragmentItemListItemBinding>(LayoutInflater.from(parent.context), R.layout.fragment_item_list_item, parent, false)
-                ItemListRecyclerViewItemViewHolder(binding)
+            when (viewType) {
+                ItemType.ITEM.value -> {
+                    val binding = DataBindingUtil.inflate<FragmentItemListItemBinding>(LayoutInflater.from(parent.context), R.layout.fragment_item_list_item, parent, false)
+                    ItemListRecyclerViewItemViewHolder(binding)
+                }
+                ItemType.LOADING.value -> {
+                    val binding = DataBindingUtil.inflate<FragmentItemListItemLoadingBinding>(LayoutInflater.from(parent.context), R.layout.fragment_item_list_item_loading, parent, false)
+                    ItemListRecyclerViewLoadingItemViewHolder(binding)
+                }
+                else -> {
+                    throw IllegalStateException()
+                }
             }
-            ItemType.LOADING.value -> {
-                val binding = DataBindingUtil.inflate<FragmentItemListItemLoadingBinding>(LayoutInflater.from(parent.context), R.layout.fragment_item_list_item_loading, parent, false)
-                ItemListRecyclerViewLoadingItemViewHolder(binding)
-            }
-            else -> {
-                throw IllegalStateException()
-            }
-        }
 
     override fun getItemCount(): Int {
-        return itemList.count() + (if(isLoading) 1 else 0)
+        return itemList.count() + (if (isLoading) 1 else 0)
     }
 
     class ItemListRecyclerViewItemViewHolder(val binding: FragmentItemListItemBinding) : RecyclerView.ViewHolder(binding.root)

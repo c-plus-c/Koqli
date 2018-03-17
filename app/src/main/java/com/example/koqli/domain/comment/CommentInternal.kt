@@ -1,6 +1,7 @@
 package com.example.koqli.domain.comment
 
 import com.example.koqli.domain.user.User
+import java.io.Serializable
 import java.util.*
 
 /**
@@ -14,4 +15,4 @@ data class CommentInternal(
         val id: String?,
         val body: String?,
         val user: User?
-)
+) : Serializable

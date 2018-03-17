@@ -12,17 +12,17 @@ import retrofit2.http.*
  * Created by biwaishi on 2017/09/09.
  */
 
-interface QiitaV2Api{
+interface QiitaV2Api {
     companion object {
-        fun getQiitaAuthUrl(apiUrl: String, clientId: String, state: String): String{
+        fun getQiitaAuthUrl(apiUrl: String, clientId: String, state: String): String {
             return HttpUrl.parse("$apiUrl")?.newBuilder()
                     ?.addQueryParameter("scope", "read_qiita write_qiita")
                     ?.addQueryParameter("state", state)
-                    ?.addQueryParameter("client_id",clientId)
+                    ?.addQueryParameter("client_id", clientId)
                     .toString()
         }
 
-        fun extractAuthCode(url: String): String?{
+        fun extractAuthCode(url: String): String? {
             return Uri.parse(url).getQueryParameter("code")
         }
     }

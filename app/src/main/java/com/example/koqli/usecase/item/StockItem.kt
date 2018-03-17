@@ -12,11 +12,10 @@ import javax.inject.Inject
 class StockItem(private val itemId: String) : BaseRxUseCase<Boolean>() {
 
     @Inject
-    lateinit var stockService: StockService;
+    lateinit var stockService: StockService
 
     override fun source(): Single<Boolean> =
-            Single.create {
-                stockService.stockItem(itemId)
-            }
+            stockService.stockItem(itemId)
+
 
 }

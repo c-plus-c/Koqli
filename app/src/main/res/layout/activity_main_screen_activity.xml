@@ -2,15 +2,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+        android:id="@+id/drawer_layout"
+        android:fitsSystemWindows="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <fragment
-            android:id="@+id/fragment"
-            android:name="com.example.koqli.ui.screen.items.ItemsListPagingFragment"
+        <FrameLayout
+            android:id="@+id/main_content"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true" />
 
         <!-- The navigation drawer -->
         <android.support.design.widget.NavigationView
@@ -19,6 +20,6 @@
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="true"
-            app:menu="@menu/nav_drawer_menu"/>
-</android.support.v4.widget.DrawerLayout>
+            app:menu="@menu/nav_drawer_menu" />
+    </android.support.v4.widget.DrawerLayout>
 </layout>

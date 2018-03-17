@@ -1,5 +1,7 @@
 package com.example.koqli.domain.user
 
+import java.io.Serializable
+
 /**
  * Created by biwaishi on 2017/09/16.
  */
@@ -19,4 +21,4 @@ data class UserInternal(
         val name: String? = null,
         val location: String? = null,
         val githubLoginName: String? = null
-)
+) : Serializable

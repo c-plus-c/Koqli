@@ -1,6 +1,6 @@
 package com.example.koqli.domain.tagging
 
-import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 /**
  * Created by biwaishi on 2017/09/16.
@@ -8,4 +8,4 @@ import com.google.gson.annotations.SerializedName
 data class TaggingInternal(
         val versions: List<String?>? = null,
         val name: String? = null
-)
+) : Serializable
